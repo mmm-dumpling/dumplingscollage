@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dumpling's Collage</title>
+  <style>
+    /* ─────────────────────────────────────────
+       DUMPLING'S COLLAGE — Placeholder Page
+       Safe to edit: change any text between
+       the HTML tags below.
+    ───────────────────────────────────────── */
+
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap');
+
+    :root {
+      --ink:        #1a1a18;
+      --paper:      #f5f2eb;
+      --rule:       #c8c2b0;
+      --muted:      #7a7468;
+      --accent:     #2a3d2e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 580px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Top rule */
+    .rule-top {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    .rule-top::before,
+    .rule-top::after {
+      content: '◆';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.5rem;
+      color: var(--rule);
+    }
+    .rule-top::before { left: 0; }
+    .rule-top::after  { right: 0; }
+
+    .eyebrow {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.3rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2.8rem;
+    }
+
+    /* Middle rule */
+    .rule-mid {
+      width: 3rem;
+      height: 1px;
+      background: var(--rule);
+      margin: 0 auto 2.8rem;
+    }
+
+    .body-text {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--ink);
+      margin-bottom: 2.8rem;
+    }
+
+    .body-text em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* Platform list */
+    .platforms {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+      text-align: left;
+      padding: 0 1rem;
+    }
+
+    .platforms li {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .platforms li::before {
+      content: '';
+      display: inline-block;
+      width: 1.8rem;
+      height: 1px;
+      background: var(--rule);
+      flex-shrink: 0;
+    }
+
+    /* Bottom rule */
+    .rule-bottom {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 1.6rem;
+    }
+
+    .footer-note {
+      font-family: 'Courier Prime', 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rule);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="rule-top"></div>
+
+    <p class="eyebrow">Personal Archive &nbsp;·&nbsp; Est. 2026</p>
+
+    <h1>Dumpling's<br><em>Collage</em></h1>
+    <p class="subtitle">A permanent home for a digital life</p>
+
+    <div class="rule-mid"></div>
+
+    <p class="body-text">
+      This archive is being assembled. When complete, it will collect
+      years of writing, posting, and scrapbooking from across the internet —
+      all in one <em>quiet, permanent place</em>.
+    </p>
+
+    <ul class="platforms">
+      <li>LiveJournal — blog entries &amp; memories</li>
+      <li>Twitter / X — timeline archive</li>
+      <li>Bluesky — feed archive</li>
+      <li>Blogger — personal website</li>
+      <li>Telegram — Dumpling's Scrapbook</li>
+    </ul>
+
+    <div class="rule-bottom"></div>
+
+    <p class="footer-note">domoredumpling.com &nbsp;·&nbsp; under construction</p>
+
+  </div>
+
+</body>
+</html>
