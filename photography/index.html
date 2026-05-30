@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography — Dumpling's Collage</title>
+  <style>
+    /* ═══════════════════════════════════════════════════
+       PHOTOGRAPHY PAGE
+       ───────────────────────────────────────────────────
+       HOW TO ADD PHOTOS:
+
+       Each photo is one <a> block inside the
+       <div class="photo-wall"> section below.
+
+       Copy this template for each photo:
+
+         <a class="photo-item" href="YOUR_FLICKR_URL" target="_blank" rel="noopener">
+           <img src="YOUR_THUMBNAIL_URL" alt="Brief description of photo" loading="lazy">
+         </a>
+
+       → href:  paste the full Flickr URL for that photo
+                e.g. https://www.flickr.com/photos/yourname/12345678
+       → src:   paste the thumbnail URL from Flickr
+                (right-click a photo on Flickr → Copy image address)
+       → alt:   a short description (good for accessibility)
+
+       To get a Flickr thumbnail URL:
+       1. Go to the photo on Flickr
+       2. Click the download arrow → choose "Small" or "Medium"
+       3. Right-click the image → Copy Image Address
+       4. Paste that URL as the src value above
+
+       HINT: The wall fills in automatically — just keep
+       adding <a class="photo-item"> blocks and they will
+       arrange themselves into the grid.
+    ═══════════════════════════════════════════════════ */
+
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap');
+
+    :root {
+      --ink:        #1a1a18;
+      --paper:      #f5f2eb;
+      --paper-dark: #ede9df;
+      --rule:       #c8c2b0;
+      --muted:      #7a7468;
+      --accent:     #2a3d2e;
+      --hover-bg:   #eee9de;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      min-height: 100vh;
+    }
+
+    /* ─── HEADER ────────────────────────────────────── */
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      background-color: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .site-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .site-title em { font-style: italic; color: var(--accent); }
+
+    .nav-group { display: flex; align-items: center; gap: 0.5rem; }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.45rem 1rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active,
+    .nav-btn.open {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-dropdown { position: relative; }
+
+    .nav-btn .arrow {
+      display: inline-block;
+      font-size: 0.55rem;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-btn.open .arrow { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      list-style: none;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      min-width: 230px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .dropdown-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    .dropdown-menu li { border-bottom: 1px solid var(--paper-dark); }
+    .dropdown-menu li:last-child { border-bottom: none; }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.8rem 1.1rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+
+    .dropdown-menu a:hover { background: var(--hover-bg); }
+    .nav-label { flex: 1; }
+
+    .nav-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── PAGE HEADER ───────────────────────────────── */
+
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header h1 em { font-style: italic; color: var(--accent); }
+
+    .page-header p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    /* ─── PHOTO WALL ────────────────────────────────── */
+
+    .photo-wall {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      columns: 4 220px;
+      column-gap: 0.75rem;
+    }
+
+    /* Each photo item */
+    .photo-item {
+      display: block;
+      break-inside: avoid;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .photo-item img {
+      width: 100%;
+      display: block;
+      transition: opacity 0.25s ease, transform 0.3s ease;
+    }
+
+    .photo-item:hover img {
+      opacity: 0.88;
+      transform: scale(1.02);
+    }
+
+    /* Subtle Flickr indicator on hover */
+    .photo-item::after {
+      content: '↗ Flickr';
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.6rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+      background: rgba(0,0,0,0.45);
+      padding: 0.2rem 0.4rem;
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .photo-item:hover::after { opacity: 1; }
+
+    /* ─── EMPTY STATE ───────────────────────────────── */
+    /* Shown when no photos have been added yet */
+
+    .empty-state {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 2rem;
+      opacity: 0.25;
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-state h2 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      line-height: 1.8;
+      color: var(--rule);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rule);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+
+      <a href="../index.html" class="site-title">Dumpling's <em>Collage</em></a>
+
+      <nav class="nav-group">
+        <div class="nav-dropdown">
+          <button class="nav-btn" id="navToggle" aria-expanded="false" aria-controls="dropdownMenu">
+            Archive <span class="arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenu" role="menu">
+            <li><a href="../livejournal/index.html" role="menuitem"><span class="nav-label">LiveJournal</span><span class="nav-tag">Blog</span></a></li>
+            <li><a href="../twitter/index.html" role="menuitem"><span class="nav-label">Twitter / X</span><span class="nav-tag">Timeline</span></a></li>
+            <li><a href="../bluesky/index.html" role="menuitem"><span class="nav-label">Bluesky</span><span class="nav-tag">Feed</span></a></li>
+            <li><a href="../blogger/index.html" role="menuitem"><span class="nav-label">Blogger</span><span class="nav-tag">Website</span></a></li>
+            <li><a href="../telegram/index.html" role="menuitem"><span class="nav-label">Dumpling's Scrapbook</span><span class="nav-tag">Telegram</span></a></li>
+          </ul>
+        </div>
+        <a class="nav-btn active" href="index.html">Photography</a>
+        <a class="nav-btn" href="../blog/index.html">Blog</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <div class="page-header">
+    <!-- EDIT PAGE TITLE AND DESCRIPTION HERE -->
+    <span class="section-label">Photography</span>
+    <h1>Photo <em>Wall</em></h1>
+    <p>
+      A scrolling collection of photographs — each thumbnail
+      links to the full image on Flickr.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       PHOTO WALL
+       ───────────────────────────────────────────────────
+       ADD PHOTOS HERE. Copy and paste this block for
+       each photo you want to display:
+
+         <a class="photo-item" href="FLICKR_PAGE_URL" target="_blank" rel="noopener">
+           <img src="FLICKR_THUMBNAIL_URL" alt="Photo description" loading="lazy">
+         </a>
+
+       The wall will arrange them automatically.
+       Delete the empty-state block below once you have
+       at least one photo added.
+  ═══════════════════════════════════════════════════ -->
+
+  <!-- DELETE THIS EMPTY STATE BLOCK ONCE YOU ADD PHOTOS -->
+  <div class="empty-state">
+    <div class="empty-icon">⬚</div>
+    <h2>No photos yet</h2>
+    <p>
+      Open this file in a text editor and follow<br>
+      the instructions in the PHOTO WALL comment<br>
+      to add your Flickr thumbnails.
+    </p>
+  </div>
+
+  <div class="photo-wall">
+    <!-- ADD YOUR PHOTOS HERE — example (delete this comment when done):
+
+    <a class="photo-item" href="https://www.flickr.com/photos/yourname/123456" target="_blank" rel="noopener">
+      <img src="https://live.staticflickr.com/yourimage_m.jpg" alt="Sunset over the lake" loading="lazy">
+    </a>
+
+    <a class="photo-item" href="https://www.flickr.com/photos/yourname/789012" target="_blank" rel="noopener">
+      <img src="https://live.staticflickr.com/anotherimage_m.jpg" alt="Street scene" loading="lazy">
+    </a>
+
+    -->
+  </div>
+
+  <footer>
+    <p class="footer-text">domoredumpling.com &nbsp;·&nbsp; Photography</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const menu   = document.getElementById('dropdownMenu');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Dumpling's Collage</title>
+  <style>
+    /* ═══════════════════════════════════════════════════
+       BLOG PAGE — Placeholder
+       ───────────────────────────────────────────────────
+       This is a placeholder. When you're ready to start
+       blogging, come back to this project chat and we
+       will build out the full blog structure together.
+
+       For now this page is live and navigable — it just
+       tells visitors the blog is coming soon.
+
+       EASY EDITS:
+       → Change the "coming soon" message: find the
+         <div class="placeholder-content"> section below.
+       → Change the page title in <title> above and in
+         the <h1> tag below.
+    ═══════════════════════════════════════════════════ */
+
+    @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap');
+
+    :root {
+      --ink:        #1a1a18;
+      --paper:      #f5f2eb;
+      --paper-dark: #ede9df;
+      --rule:       #c8c2b0;
+      --muted:      #7a7468;
+      --accent:     #2a3d2e;
+      --hover-bg:   #eee9de;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── HEADER ────────────────────────────────────── */
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      background-color: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .site-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .site-title em { font-style: italic; color: var(--accent); }
+
+    .nav-group { display: flex; align-items: center; gap: 0.5rem; }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.45rem 1rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active,
+    .nav-btn.open {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-dropdown { position: relative; }
+
+    .nav-btn .arrow {
+      display: inline-block;
+      font-size: 0.55rem;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-btn.open .arrow { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      list-style: none;
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      min-width: 230px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .dropdown-menu.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+
+    .dropdown-menu li { border-bottom: 1px solid var(--paper-dark); }
+    .dropdown-menu li:last-child { border-bottom: none; }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.8rem 1.1rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+
+    .dropdown-menu a:hover { background: var(--hover-bg); }
+    .nav-label { flex: 1; }
+
+    .nav-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── PLACEHOLDER CONTENT ───────────────────────── */
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    .placeholder-content {
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .section-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.6rem;
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .rule-mid {
+      width: 3rem;
+      height: 1px;
+      background: var(--rule);
+      margin: 0 auto 1.8rem;
+    }
+
+    .placeholder-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rule);
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+
+      <a href="../index.html" class="site-title">Dumpling's <em>Collage</em></a>
+
+      <nav class="nav-group">
+        <div class="nav-dropdown">
+          <button class="nav-btn" id="navToggle" aria-expanded="false" aria-controls="dropdownMenu">
+            Archive <span class="arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenu" role="menu">
+            <li><a href="../livejournal/index.html" role="menuitem"><span class="nav-label">LiveJournal</span><span class="nav-tag">Blog</span></a></li>
+            <li><a href="../twitter/index.html" role="menuitem"><span class="nav-label">Twitter / X</span><span class="nav-tag">Timeline</span></a></li>
+            <li><a href="../bluesky/index.html" role="menuitem"><span class="nav-label">Bluesky</span><span class="nav-tag">Feed</span></a></li>
+            <li><a href="../blogger/index.html" role="menuitem"><span class="nav-label">Blogger</span><span class="nav-tag">Website</span></a></li>
+            <li><a href="../telegram/index.html" role="menuitem"><span class="nav-label">Dumpling's Scrapbook</span><span class="nav-tag">Telegram</span></a></li>
+          </ul>
+        </div>
+        <a class="nav-btn" href="../photography/index.html">Photography</a>
+        <a class="nav-btn active" href="index.html">Blog</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- EDIT THE COMING SOON MESSAGE HERE -->
+    <div class="placeholder-content">
+      <span class="section-label">Blog</span>
+      <h1>Coming <em>Soon</em></h1>
+      <div class="rule-mid"></div>
+      <p>
+        This space is reserved for new writing.<br>
+        Check back soon.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p class="footer-text">domoredumpling.com &nbsp;·&nbsp; Blog</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const menu   = document.getElementById('dropdownMenu');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      }
+    });
+  </script>
+
+</body>
+</html>
