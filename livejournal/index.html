@@ -101,11 +101,16 @@ body {
 
 /* ---- LJ HEADER BANNER ---- */
 .lj-header {
+  max-width: 980px;
+  margin: 0 auto;
   width: 100%;
   height: 210px;
   position: relative;
   overflow: hidden;
-  /* Banner image — place banner.png in the livejournal/ folder */
+  display: block;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  box-sizing: border-box;
   background: url('banner.png') center center / cover no-repeat;
   background-color: #c8e8f0;
 }
@@ -147,10 +152,11 @@ body {
   max-width: 980px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 165px 1fr;
+  grid-template-columns: 165px minmax(0, 1fr);
   background: #fff;
   border: 1px solid #aaa;
   border-top: none;
+  box-sizing: border-box;
 }
 
 /* ---- SIDEBAR ---- */
